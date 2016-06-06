@@ -6,14 +6,19 @@ import time
 
 m = PyMouse()
 
+def sleep(x):
+   #sleep(x)
+   #time.sleep(0.1)
+   pass
+
 #http://stackoverflow.com/questions/3545230/simulate-mouse-clicks-on-python
 def set_pos(x, y):
    m.move(x, y)
-   time.sleep(0.1)
+   sleep(0.1)
 
 def click(x, y):
    m.click(x,y)
-   time.sleep(0.05)
+   sleep(0.05)
 
 def in_list(lst, item):
    try:
@@ -31,8 +36,10 @@ bot_lst = ['z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.']
 
 num_lst = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
+def switch_in_type():
+   click(199, 801) #convert to numbers input
 
-def letter(l):
+def letter(l, prev_num=False):
    q_x = 170
    q_y = 570
 
@@ -45,8 +52,12 @@ def letter(l):
    num_x = 177
    num_y = 580
 
-   #set_pos(q_x + 55*top_lst.index(l), q_y)
+   if in_list(num_lst, l) and not prev_num:
+      switch_in_type()
+   if not in_list(num_lst, l) and prev_num:
+      switch_in_type()
 
+   #set_pos(q_x + 55*top_lst.index(l), q_y)
    if in_list(top_lst, l):
       click(q_x + 52*top_lst.index(l), q_y)
    elif in_list(mid_lst, l):
@@ -54,9 +65,9 @@ def letter(l):
    elif in_list(bot_lst, l):
       click(z_x + 52*bot_lst.index(l), z_y)
    elif in_list(num_lst, l):
-      click(199, 801) #convert to numbers input
+      #click(199, 801) #convert to number input
       click(num_x + 52*num_lst.index(l), num_y)
-      click(199, 801) #convert to letters input
+      #click(199, 801) #convert to letters input
    else:
       print('error: unknown position for %s' % l)
    #if l == 'q':
@@ -67,17 +78,21 @@ def letter(l):
 
 def text(s):
    click(167, 495)
+   if len(s) == 0:
+      return
+   prev_num = False
    for c in s:
-      letter(c)
+      letter(c, prev_num)
+      prev_num = in_list(num_lst, c)
 
-#text("helloworld")
-#exit()
+text("hel143ls")
+exit()
 
 
 def goto_invite_page():
    click(605, 122) #mob top tab
    click(348, 321) #invite mobsters
-   time.sleep(0.5)
+   sleep(0.5)
 
 def invite(name):
    goto_invite_page()
