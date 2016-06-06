@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#sudo apt-get install android-tools-adb
+
+#on ubuntu 14.04
+#sudo add-apt-repository ppa:openjdk-r/ppa
+#sudo apt-get update
+#sudo apt-get install openjdk-8-jdk
+#sudo update-alternatives --config java
+#sudo update-alternatives --config javac
+
+cp kkrun.sh Adb-Remote-Screen
 sudo pip install pymouse
 
 git clone git@github.com:MajeurAndroid/Adb-Remote-Screen.git
