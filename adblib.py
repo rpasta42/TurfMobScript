@@ -12,32 +12,28 @@ def adb_cmd1(cmd):
    pass
 
 def click(x, y):
-   adb_cmd('input tap %s %s' % (x, y))
+   adb_sh_cmd('input tap %s %s' % (x, y))
 
+
+#list of args
 def adb_cmd(cmd):
+   return Popen([adb_path] + cmd)
+
+def adb_sh_cmd(cmd):
    cmd += '; exit\n'
    print('running command: ' + cmd)
    p = Popen([adb_path, 'shell'], stdout = PIPE, stdin = PIPE, stderr = STDOUT)
    return p.communicate(input=bytes(cmd))[0]
 
 
-def screenshot():
-   pic_raw = adb_cmd('screencap -p')
-   png = b""
+def screenshot(name = 'screenshot.png'):
+   fpath = '/mnt/sdcard/' + name
+   pic_raw = adb_sh_cmd('screencap -p ' + fpath)
 
-   first_exit = pic_raw.find("exit", 0, 200) 
-   second_exit = pic_raw.find("exit", first_exit, 200)
-   data_start = second_exit + 4
+   adb_cmd(['pull', fpath])
 
-   for c in pic_raw[data_start:]:
-      if c == '\r':
-         continue
-      
-      if exit_n == 2:
-         png += c
-
-   with open('screenshot.png', 'w') as f:
-      f.write(png)
+   #with open('screenshot.png', 'w') as f:
+   #   f.write(bytes(png))
 
 
 if __name__ == "__main__":

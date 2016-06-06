@@ -1,31 +1,17 @@
 #!/usr/bin/python
 
-import sys, adblib
-#from pymouse import PyMouse
+import sys
+from pymouse import PyMouse
 import time
 
-from Tkinter import *
-from PIL import Image, ImageTk
-
-def interface_test():
-   root = Tk()
-   pic_path = 'screenshot.png'
-   adblib.screenshot(pic_path)
-   
-   image = Image.open(pic_path)
-   display = ImageTk.PhotoImage(Image.open(image))
-
-   label = Label(root, image=display)
-   label.pack()
-
-   root.mainloop()
-
+m = PyMouse()
 
 def sleep(x):
    #sleep(x)
    #time.sleep(0.1)
    pass
 
+#http://stackoverflow.com/questions/3545230/simulate-mouse-clicks-on-python
 def set_pos(x, y):
    m.move(x, y)
    sleep(0.1)
@@ -89,6 +75,7 @@ def letter(l, prev_num=False):
    #if l == 'w':
    #   click(230, 570)
 
+
 def text(s):
    click(167, 495)
    if len(s) == 0:
@@ -97,6 +84,10 @@ def text(s):
    for c in s:
       letter(c, prev_num)
       prev_num = in_list(num_lst, c)
+
+text("hel143ls")
+exit()
+
 
 def goto_invite_page():
    click(605, 122) #mob top tab
@@ -134,6 +125,5 @@ if len(sys.argv) == 2 and sys.argv[1] == "get":
 elif len(sys.argv) == 3 and sys.argv[1] == "run":
       main(sys.argv[2])
 else:
-   interface_test()
    print("error: usage: %s [get] [run invite.lst]" % sys.argv[0])
 

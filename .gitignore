@@ -1,2 +1,4 @@
 Adb-Remote-Screen
 .*.swp
+*.pyc
+screenshot.png
