@@ -1,0 +1,53 @@
+<html>
+<head>
+   <script src='common.js'></script>
+   <script src='jquery-2.2.4.min.js'></script>
+
+   <script>
+      var first = true;
+
+      function setPic(path, width, height, prop) {
+         if (first) {
+            first = false;
+            $('#width').html(width);
+            $('#height').html(height);
+            pic = $('#pic');
+
+            pic.click(function(e) {
+               var x = (e.pageX - $(this).offset().left);
+               var y = (e.pageY - $(this).offset().top);
+
+               //console.log('javascript click')
+               sendToPy({ 'x' : x, 'y' : y, 'prop': prop});
+               //alert('x: ' + x + '; y: ' + y);
+            })
+
+         }
+
+         //var pic = $('#pic');
+
+         var d = new Date();
+         pic.attr('src', path + "?" + d.getTime());
+
+         pic.attr('width', (width * prop) + 'px');
+         pic.attr('height', (height*prop) + 'px');
+      }
+   </script>
+
+   <style>
+      /*#pic {
+         width: 400px;
+         height: 1000px;
+      }*/
+   </style>
+
+</head>
+<body>
+   <div id='width'></div>
+   <div id='height'></div>
+
+   <img id="pic" src=''/>
+
+
+</body>
+</html>

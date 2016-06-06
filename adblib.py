@@ -5,23 +5,13 @@ from subprocess import Popen, PIPE, STDOUT
 #from pycloak import shellutils as sh
 adb_path = '/usr/bin/adb'
 
-def adb_cmd1(cmd):
-   #print(sh.adb("shell", sh.echo(cmd + ';exit')))
-   #print(sh.adb("shell", sh.echo("ls")))
-   #print(sh.adb('shell ' + cmd))
-   pass
-
-def click(x, y):
-   adb_sh_cmd('input tap %s %s' % (x, y))
-
-
 #list of args
 def adb_cmd(cmd):
    return Popen([adb_path] + cmd)
 
 def adb_sh_cmd(cmd):
    cmd += '; exit\n'
-   print('running command: ' + cmd)
+   #print('running command: ' + cmd)
    p = Popen([adb_path, 'shell'], stdout = PIPE, stdin = PIPE, stderr = STDOUT)
    return p.communicate(input=bytes(cmd))[0]
 
@@ -35,8 +25,15 @@ def screenshot(name = 'screenshot.png'):
    #with open('screenshot.png', 'w') as f:
    #   f.write(bytes(png))
 
+def click(x, y):
+   adb_sh_cmd('input tap %s %s' % (x, y))
+
+
+def text(string):
+   adb_sh_cmd('input text %s' % string)
 
 if __name__ == "__main__":
-   screenshot()
+   text("hello")
+   #screenshot()
    #click(100, 100)
    #click(0, 0)

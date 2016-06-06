@@ -2,6 +2,12 @@
 
 sudo apt-get install android-tools-adb #python-imaging-tk
 
+wget https://code.jquery.com/jquery-2.2.4.min.js
+
+#setup pycloak
+#workon pycloak
+#pip install gi
+
 #on ubuntu 14.04
 #sudo add-apt-repository ppa:openjdk-r/ppa
 #sudo apt-get update
