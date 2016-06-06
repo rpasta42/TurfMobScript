@@ -3,7 +3,6 @@
 from subprocess import Popen, PIPE, STDOUT
 
 #from pycloak import shellutils as sh
-#import sh
 adb_path = '/usr/bin/adb'
 
 def adb_cmd1(cmd):
@@ -12,21 +11,37 @@ def adb_cmd1(cmd):
    #print(sh.adb('shell ' + cmd))
    pass
 
-def adb_cmd(cmd):
-   cmd += '; exit\n'
-   print('running command: ' + cmd)
-   #p = Popen(['adb', 'shell'], stdout=PIPE, stdin = PIPE, stderr=STDOUT)
-   p = Popen([adb_path, 'shell'], stdout = PIPE, stdin = PIPE, stderr = STDOUT)
-   std_out = p.communicate(input=bytes(cmd))[0]
-   print('adb out: ' + std_out)
-   #cmd = '%s %s' % (adb_path, cmd)
-   #sh.exec_prog(cmd)
-   #sh.adb(cmd)
-
 def click(x, y):
    adb_cmd('input tap %s %s' % (x, y))
 
+def adb_cmd(cmd):
+   cmd += '; exit\n'
+   print('running command: ' + cmd)
+   p = Popen([adb_path, 'shell'], stdout = PIPE, stdin = PIPE, stderr = STDOUT)
+   return p.communicate(input=bytes(cmd))[0]
+
+
+def screenshot():
+   #pic_raw = adb_cmd('screencap -p >/tmp/pic')
+   #adb_cmd('screencap -p >/tmp/pic')
+   pic_raw = adb_cmd('echo')
+
+   num_exits = 0
+   exit_i = 0
+
+   png = b""
+   for c in pic_raw:
+      if c == '\r':
+         continue
+      if num_exits != 2 and (exit_n==0 and c=='e') || (exit_n==1 && c=='x') && exit_n == 2 && c == '
+      if exit_n == 2:
+         png += c
+
+   with open('screenshot.png', 'w') as f:
+      f.write(png)
+
 
 if __name__ == "__main__":
-   click(100, 100)
-   click(0, 0)
+   screenshot()
+   #click(100, 100)
+   #click(0, 0)
