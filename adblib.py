@@ -22,18 +22,17 @@ def adb_cmd(cmd):
 
 
 def screenshot():
-   #pic_raw = adb_cmd('screencap -p >/tmp/pic')
-   #adb_cmd('screencap -p >/tmp/pic')
-   pic_raw = adb_cmd('echo')
-
-   num_exits = 0
-   exit_i = 0
-
+   pic_raw = adb_cmd('screencap -p')
    png = b""
-   for c in pic_raw:
+
+   first_exit = pic_raw.find("exit", 0, 200) 
+   second_exit = pic_raw.find("exit", first_exit, 200)
+   data_start = second_exit + 4
+
+   for c in pic_raw[data_start:]:
       if c == '\r':
          continue
-      if num_exits != 2 and (exit_n==0 and c=='e') || (exit_n==1 && c=='x') && exit_n == 2 && c == '
+      
       if exit_n == 2:
          png += c
 
