@@ -10,10 +10,10 @@ from PIL import Image, ImageTk
 def interface_test():
    root = Tk()
    pic_path = 'screenshot.png'
-   adblib.screenshot(pic_path)
+   #adblib.screenshot(pic_path)
    
    image = Image.open(pic_path)
-   display = ImageTk.PhotoImage(Image.open(image))
+   display = ImageTk.PhotoImage(image, size=100)
 
    label = Label(root, image=display)
    label.pack()
