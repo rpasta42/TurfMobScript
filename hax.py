@@ -23,7 +23,7 @@ def in_list(lst, item):
       return False
 
 
-#when i left, 242
+#when i left, 243
 
 top_lst = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']
 mid_lst = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']
