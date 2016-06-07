@@ -17,7 +17,8 @@
                var x = (e.pageX - $(this).offset().left);
                var y = (e.pageY - $(this).offset().top);
 
-               //console.log('javascript click')
+               var s = 'js click x: ' + x + '; y: ' + y;
+               console.log(s);
                sendToPy({ 'x' : x, 'y' : y, 'prop': prop});
                //alert('x: ' + x + '; y: ' + y);
             })
