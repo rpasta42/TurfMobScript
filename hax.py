@@ -138,14 +138,29 @@ def invite(name):
 
 #./hax.py run invite.lst
 def main(invite_file_path):
+
+   old = open('codes-old/archive.1', 'r')
+   data = old.read()
+   old.close()
+
+   old_lst = data.split('\n')
+
    invites_str = ""
    with open(invite_file_path, "r") as f:
          invites_str += f.read()
    invites_lst = invites_str.split('\n')
    
    for player in invites_lst:
-      print('inviting ' + player)
+      extra = ''
+      if player in old_lst:
+         skip = True
+         extra = ' ALREADY INVITED, SKIPPING'
+      print('inviting %s %s', (player, extra))
+      if skip:
+         continue
+
       invite(player.lower())
+
 
 if len(sys.argv) == 3 and sys.argv[1] == "run":
       main(sys.argv[2])
