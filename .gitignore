@@ -1,6 +1,7 @@
 Adb-Remote-Screen
 .*.swp
 *.pyc
+*~
 screenshot.png
 jquery-2.2.4.min.js
 __pycache__
