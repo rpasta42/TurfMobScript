@@ -125,6 +125,7 @@ def text(s):
 def goto_invite_page():
    #kk tmp comment click(354, 64) #mob top tab
    click(168, 200) #invite mobsters
+   sleep(0.5)
 
 def invite(name):
    goto_invite_page()
@@ -133,6 +134,7 @@ def invite(name):
 
    text(name)
    click(245, 352) #invite button
+   sleep(0.1)
 
 #./hax.py run invite.lst
 def main(invite_file_path):
