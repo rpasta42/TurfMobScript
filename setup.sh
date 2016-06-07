@@ -1,5 +1,6 @@
 #!/bin/bash
 
+touch screenshot.png
 sudo apt-get install android-tools-adb #python-imaging-tk
 
 wget https://code.jquery.com/jquery-2.2.4.min.js

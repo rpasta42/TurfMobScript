@@ -12,7 +12,7 @@ Note that for the second example, I hardcoded Nexus 7 resolution so the script p
 
 
 Most of the code should be cross-platform, but I only tested it on Ubuntu 14.04.
-Gtk Webkit is used for remote control GUI interface (not sure if Gtk Webkit supports non-Linux platforms). 
+Gtk Webkit is used for remote control GUI interface (not sure if Gtk Webkit supports non-Linux platforms).
 
 
 The project uses python (and a little of javascript) as a thin wrapper for adb. Check out adblib.py for adb wrapper.
@@ -24,3 +24,13 @@ I also use "adb shell input tap x y" to simulate mouse clicks, and "adb shell in
 
 It should be very simple to re-use adblib.py to to create your own automation scripts for android devices.
 By running ./hax.py (without arguments), you can get locations of your clicks, and then use adblib.py to chain together click/keyboard commands.
+
+TODO:
+   - [ ] uncidode codes (£)
+   - [ ] codes with $ break shell
+   - [x] code extractor for tables
+   - [ ] run "cat invite.lst | wc -l; time ./hax.py run invite.lsts"
+
+entered up to page 41 (7th Jan 2016): http://www.clancodes.com/game/turf-wars/41/
+good source of codes: mob.codes
+
