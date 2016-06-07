@@ -36,3 +36,7 @@ TODO:
 entered up to page 41 (7th Jan 2016): http://www.clancodes.com/game/turf-wars/41/
 good source of codes: mob.codes
 
+
+#get only unique codes
+sort codes-old/archive.1 | uniq | wc -l >codes-old/archive.1.unique.sorted
+

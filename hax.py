@@ -155,7 +155,7 @@ def main(invite_file_path):
       if player in old_lst:
          skip = True
          extra = ' ALREADY INVITED, SKIPPING'
-      print('inviting %s %s', (player, extra))
+      print 'inviting %s %s' % (player, extra)
       if skip:
          continue
 
