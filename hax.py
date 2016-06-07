@@ -137,7 +137,7 @@ def invite(name):
    sleep(0.1)
 
 #./hax.py run invite.lst
-def main(invite_file_path):
+def main(invite_file_path, ignore_repeats=True):
 
    old = open('codes-old/archive.1', 'r')
    data = old.read()
@@ -154,16 +154,16 @@ def main(invite_file_path):
       extra = ''
       if player in old_lst:
          skip = True
-         extra = ' ALREADY INVITED, SKIPPING'
+         extra = ' (ALREADY INVITED, SKIPPING)'
       print 'inviting %s %s' % (player, extra)
-      if skip:
+      if skip and ignore_repeats:
          continue
 
       invite(player.lower())
 
 
 if len(sys.argv) == 3 and sys.argv[1] == "run":
-      main(sys.argv[2])
+   main(sys.argv[2]) #(sys.argv[2], False) to try entering repeats
 else:
    interface_test()
    print("error: usage: %s [run invite.lst]" % sys.argv[0])
