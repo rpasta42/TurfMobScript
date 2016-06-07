@@ -38,5 +38,6 @@ good source of codes: mob.codes
 
 
 #get only unique codes
-sort codes-old/archive.1 | uniq | wc -l >codes-old/archive.1.unique.sorted
+#sort codes-old/archive.1 | uniq | wc -l >codes-old/archive.1.unique.sorted
+sort codes-old/archive.1 | uniq >codes-old/archive.1.unique.sorted
 
