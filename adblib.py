@@ -17,6 +17,7 @@ def adb_sh_cmd(cmd):
 
 
 def screenshot(name = 'screenshot.png'):
+   """puts the screenshot in the current directory"""
    fpath = '/mnt/sdcard/' + name
    pic_raw = adb_sh_cmd('screencap -p ' + fpath)
 
@@ -27,7 +28,6 @@ def screenshot(name = 'screenshot.png'):
 
 def click(x, y):
    adb_sh_cmd('input tap %s %s' % (x, y))
-
 
 def text(string):
    adb_sh_cmd('input text %s' % string)
