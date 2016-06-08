@@ -152,6 +152,7 @@ def main(invite_file_path, ignore_repeats=True):
    
    for player in invites_lst:
       extra = ''
+      skip = False
       if player in old_lst:
          skip = True
          extra = ' (ALREADY INVITED, SKIPPING)'
