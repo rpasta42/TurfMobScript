@@ -16,6 +16,16 @@ def adb_sh_cmd(cmd):
    return p.communicate(input=bytes(cmd))[0]
 
 
+def start_video():
+   adb_sh_cmd('mkdir /sdcard/video-data')
+
+def video(fpath, width=1024, height=768, bitrate=None, time=None):
+   #default is 4Mbps, but lower bitrate == higher fps
+   if bitrate is None:
+      bitrate = 2 * 1000 * 1000
+   time_str
+   adb_sh_cmd
+
 def screenshot(name = 'screenshot.png'):
    fpath = '/mnt/sdcard/' + name
    pic_raw = adb_sh_cmd('screencap -p ' + fpath)
