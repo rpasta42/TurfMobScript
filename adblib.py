@@ -40,7 +40,7 @@ def click(x, y):
    adb_sh_cmd('input tap %s %s' % (x, y))
 
 def text(string):
-   adb_sh_cmd('input text %s' % string)
+   adb_sh_cmd('input text "%s"' % string)
 
 if __name__ == "__main__":
    text("hello")
