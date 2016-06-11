@@ -132,6 +132,11 @@ def invite(name):
 
    click(58, 352) #invite field
 
+   #kk "FRIGS67`1"
+   splitted = name.split('`')
+   if len(splitted) > 1:
+      name = splitted[0] + "\\" + '`' + splitted[1]
+
    text(name)
    click(245, 352) #invite button
    click(245, 352) #invite button
