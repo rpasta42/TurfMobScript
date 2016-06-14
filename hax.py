@@ -125,7 +125,7 @@ def text(s):
 def goto_invite_page():
    #kk tmp comment click(354, 64) #mob top tab
    click(168, 200) #invite mobsters
-   sleep(0.5)
+   sleep(0.2)
 
 def invite(name):
    goto_invite_page()
@@ -139,9 +139,9 @@ def invite(name):
 
    text(name)
    click(245, 352) #invite button
-   click(245, 352) #invite button
 
-   sleep(0.1)
+   sleep(0.1) ##kk last time i tried this broke. testing 0.5
+   #sleep(0.4)
 
 #./hax.py run invite.lst
 def main(invite_file_path, ignore_repeats=True):
@@ -156,7 +156,7 @@ def main(invite_file_path, ignore_repeats=True):
    with open(invite_file_path, "r") as f:
          invites_str += f.read()
    invites_lst = invites_str.split('\n')
-   
+
    for player in invites_lst:
       extra = ''
       skip = False
