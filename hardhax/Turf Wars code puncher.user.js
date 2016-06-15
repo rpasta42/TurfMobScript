@@ -14,9 +14,6 @@ unsafeWindow.on = true;
 
 var codes_todo = [];
 
-
-
-
 function invite(code) {
     $('#invite_code').val(code);
     $('#invite_btn').click();
@@ -26,9 +23,9 @@ function invite(code) {
 var codes = {};
 //var codes_todo = ['test', 'bob', 'ross'];
 
-//historic done 0-100
-var start = 100;
-var end = 500;
+//historic done 0-100, 100-500, 500-1000, 1000-5000
+var start = 1300;
+var end = 5000;
 
 function onInviteComplete() {
     console.log('done');
@@ -121,6 +118,7 @@ function kk_inviteLooper() {
     }
     var code = codes_todo[start++];
     global_code = code;
+    console.log('code: ' + code + '; n: ' + start);
     kk_invite(code, kk_postInvite);
 }
 
@@ -163,6 +161,18 @@ function kk_inviteRequest(invite_param, sendingButton, onSuccess, input, tps) {
 }
 
 function kk_postInvite(target, response, chlg)  {
+    //var wait = 300; //default
+    //var wait = 400;
+    var wait = 50;
+    //var wait = 1000;
+    //wait += Math.random() * 5000;
+    //var wait = Math.random() * 3000 + 4000;
+    setTimeout(function() {
+        kk_postInvite_real(target, response, chlg);
+    }, wait);
+}
+
+function kk_postInvite_real(target, response, chlg)  {
     console.log(response);
     var code = global_code;
     
