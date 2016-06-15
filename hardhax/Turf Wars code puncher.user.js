@@ -10,6 +10,17 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
+function kk_getWait() {
+    var wait = 0;
+    //var wait = 300; //default
+    //var wait = 400;
+    //var wait = 50;
+    //var wait = 1000;
+    //wait += Math.random() * 5000;
+    //var wait = Math.random() * 3000 + 3000;
+    //var wait = Math.random() * 1000 + 500;
+    return wait;
+}
 unsafeWindow.on = true;
 
 var codes_todo = [];
@@ -23,9 +34,11 @@ function invite(code) {
 var codes = {};
 //var codes_todo = ['test', 'bob', 'ross'];
 
-//historic done 0-100, 100-500, 500-1000, 1000-5000
-var start = 1300;
-var end = 5000;
+//historic done 0-100, 100-500, 500-1000, 1000-5000, 5000-6000, 6000-7000
+//7000-10000, 10,000-11,000, 12,000-13,000, 13,000-15,0000
+//
+var start = 15000;
+var end = 15000;
 
 function onInviteComplete() {
     console.log('done');
@@ -112,6 +125,7 @@ function kk_main() {
 }
 
 function kk_inviteLooper() {
+    
     if (start >= codes_todo.length || start >= end) {
         onInviteComplete();
         return;
@@ -161,12 +175,7 @@ function kk_inviteRequest(invite_param, sendingButton, onSuccess, input, tps) {
 }
 
 function kk_postInvite(target, response, chlg)  {
-    //var wait = 300; //default
-    //var wait = 400;
-    var wait = 50;
-    //var wait = 1000;
-    //wait += Math.random() * 5000;
-    //var wait = Math.random() * 3000 + 4000;
+    var wait = kk_getWait();
     setTimeout(function() {
         kk_postInvite_real(target, response, chlg);
     }, wait);
