@@ -1,43 +1,36 @@
-# TurfMobScript
-Remote control tool for android (using ADB), and automation script for entering invite codes for Turf Wars.
 
-Usage:
+#### guiAndroidBotTool
+This folder has a remote control tool for android (using ADB), and a separate (outdated) script which automates entering invite codes for Turf Wars Android game. Check out guiAndroidBotTool/README.md for more info.
 
-./hax.py = very primitive remote control tool for android which enables you to click on the screen
+The remote control tool can be used to create automate clicks and keyboard events on Android device for various apps.
 
-./hax.py run invite.lst = reads file from invite.lst and enters them in Turf Wars (need to have "Mob" tab open)
+One problem is that it's somewhat slow, and second main problem is there is no feedback after click/keyboard events so it's impossible to check success/fail status.
 
-The first version is generic Remote Control tool, and will print location of clicks, and pass them to android.
-Note that for the second example, I hardcoded Nexus 7 resolution so the script probably won't work on your phone/tablet unless you modify the click locations.
+#### hardHax
+This is new version of code puncher I made as a Tampermonkey extension which runs in Chrome.
 
+Here's a list of reasons for making new version:
+- Old version couldn't get status of code after punching it, so I didn't know which once succeeded and which once failed.
+- It relied on click hardcoded locations on screen, so it only worked on Nexus 7 tablets.
+- Often codes were skipped and I couldn't check the return status
+- Click stuff is slow
+- Had to have a tablet hooked up during the script, which made the tablet unusable while it's running
+- Recently started breaking after captcha was added to Turf Wars
 
-Most of the code should be cross-platform, but I only tested it on Ubuntu 14.04.
-Gtk Webkit is used for remote control GUI interface (not sure if Gtk Webkit supports non-Linux platforms).
+Turf Wars doesn't have a website version and only runs inside an app. By reverse-engineering the java code, I figured out that the game runs inside a website, but it's inaccessible from desktop Browser because LogIn page only gets displayed in the app.
 
+I figured out that by rooting device I can get the session cookie stored in SQLite database in /data/data/com.meanfreepathllc.turfwars/app_webiview/Cookies.
 
-The project uses python (and a little of javascript) as a thin wrapper for adb. Check out adblib.py for adb wrapper.
+I automated the process of getting cookies by running ./hardhax/cookie.sh on a rooted tablet, and manually modyfing cookie in Chrome with an extension (I'm using EditThisCookie). Output of ./cookie.sh should print something like:
 
+`name,value
+SA,sdfTsd3lkz-Tdsf3B59
+`
+The part after SA, is the cookie, in this case "sdfTsd3lkz-Tdsf3B59".
 
-I basically use "adb shell screencap -p /mnt/sdcard/file.png" and then "adb pull /mnt/sdcard/file.png" to update the android remote control GUI (this is extremely slow ~0.5 frames/second).
-I also use "adb shell input tap x y" to simulate mouse clicks, and "adb shell input text blahblah" to simulate keyboard.
-
-
-It should be very simple to re-use adblib.py to to create your own automation scripts for android devices.
-By running ./hax.py (without arguments), you can get locations of your clicks, and then use adblib.py to chain together click/keyboard commands.
-
-TODO:
-   - [ ] uncidode codes (£)
-   - [ ] codes with $ break shell
-   - [ ] code with # break something
-   - [x] code extractor for tables
-   - [ ] run "cat invite.lst | wc -l; time ./hax.py run invite.lsts"
-   - [x] other escape stuff (FRIGS67`1, #OUDK, ###, #1)
-   - [ ] checked entered DB and ignore repetitions in invite.lsts of old stuff
-entered up to page 41 (7th Jan 2016): http://www.clancodes.com/game/turf-wars/41/
-good source of codes: mob.codes
-
-
-#get only unique codes
-#sort codes-old/archive.1 | uniq | wc -l >codes-old/archive.1.unique.sorted
-sort codes-old/archive.1 | uniq >codes-old/archive.1.unique.sorted
+The new version of the hack:
+- Works much faster (it's not recommended to run it at top speed)
+- Stores the status of every invite, and skips people who were already invited
+- Solves captcha
+- Has optional delays between every code
 
