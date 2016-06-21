@@ -47,13 +47,13 @@ var healClicksDelay = 500;
 var waitActionShort = 200;
 var waitAction = 700;
 var waitMainLoop = 2000; //delay when getting new list
-var updateCheckDamage = 3000; //if list is empty this is how long we wait before getting it again
+var updateCheckDamage = 8000; //if list is empty this is how long we wait before getting it again
 var waitNextBase = 1000; //go from turf list to next base on heal list delay
 
 
 var goToPageTime = null;
-//goToPageTime default = 2000
-goToPageTime = 5000; //overwrites delay in gotoPage
+//goToPageTime default = 2000, 10,000 for long time afk, 5,000 = ok'ish
+//goToPageTime = 500; //overwrites delay in gotoPage
 
 var sameWait = null;
 //sameWait = 50000;
@@ -224,7 +224,7 @@ function onBaseHealthCheck(turf_arg, n_left_arg, o_arg) {
 
         n_left = maxHeal;
 
-        o = newHealLog(turf.base);
+        o = newHealLog(turf.name);
         o.loc = turf.loc;
         o.max_health = turf.max_health;
         o.start_health = turf.curr_health;
