@@ -14,10 +14,13 @@
 // @grant       GM_setValue
 // ==/UserScript==
 
-//resetLogs()
+//resetAll();
+//resetLogs();
 //getLog()
 //getHealLog()
-alert(getHealLog());
+var logg = getHealLog();
+for (var line in logg) console.log(line);
+//alert(JSON.stringify(getHealLog()));
 
 var game_url = 'https://app.turfwarsapp.com/';
 var curr_url = window.location.href;
@@ -25,19 +28,24 @@ console.log(curr_url);
 
 var profile = GM_getValue("profile_url", null);
 
-//0.76 = enabled healing, 0.79 disabled
+//0.76 = enabled healing,
+//0.79 disabled
+//0.7647 = still disabled
+//0.7558 = still disabled //65/86
 var min_health = 0.79; //health at which to try to heal turf
 
+var healClicksDelay = 500;
 var waitActionShort = 200;
 var waitAction = 700;
 var waitMainLoop = 2000; //delay when getting new list
-var updateCheckDamage = 700; //if list is empty this is how long we wait before getting it again
-var waitNextBase = 400; //go from turf list to next base on heal list delay
-//var sameWait = null;
-var sameWait = 4000;
+var updateCheckDamage = 3000; //if list is empty this is how long we wait before getting it again
+var waitNextBase = 700; //go from turf list to next base on heal list delay
+
+var sameWait = null;
+//var sameWait = 400;
 
 if (sameWait != null)
-    waitActionShort = waitNextBase = updateCheckDamage = waitAction = waitMainLoop = sameWait;
+    healClicksDelay = waitActionShort = waitNextBase = updateCheckDamage = waitAction = waitMainLoop = sameWait;
 
 /////////////////////////////
 //main thing, calls start_healer or turfs_overview_run()
@@ -48,7 +56,7 @@ if (sameWait != null)
     if (curr_url.includes("map")) {
         if (isCheckingTurf())
             should_run = true;
-        setCheckingTurf(false);
+        //setCurrTurf(null);
     } else if (curr_url.includes("player")) {}
     else
         should_run = confirm('Run health bot?');
@@ -91,7 +99,7 @@ function start_healer() {
 
 //runs on Turf List
 //if no heal bases, run getDamagedBases(),
-//otherwise go to hurt base
+//otherwise go to hurt base (which triggers onBaseHealthCheck)
 function turfs_overview_run() {
     var baseToHeal = getNextHealBase();
     if (baseToHeal == null) {
@@ -183,34 +191,63 @@ function newHealLog(baseName) {
 }
 
 //we're on base profile, click heal buttons
-function onBaseHealthCheck() {
-    var turf = getCurrTurf();
-    setCurrTurf(null);
-
-    var o = newHealLog(turf.name);
-    o.loc = turf.loc;
-    o.max_health = turf.max_health;
-    o.start_health = turf.curr_health;
-
+function onBaseHealthCheck(turf_arg, n_left_arg, o_arg) {
     var maxHeal = 5;
-    for (var i = 0; i < maxHeal; i++) {
-        var repairBtn = $('#heal_button');
-        if (repairBtn == null)
-            o.msg_extra = "Can't find repair button";
-        else if ($('#heal_cost').length == 0)
-            o.msg_extra = "Can't find repair button";
 
-        if (repairBtn == null || ($('#heal_cost').length == 0)) {
-            if (i > 0)
-                o.heal_fail = false;
-            o.times_healed = i;
-            gotoPage(profile, waitAction);
-            return;
-        }
-        o.heal_cost.push($('#heal_cost').text());
+    var turf = null;
+    var o = null;
+    var n_left = null;
 
-        $('#heal_button').click();
+    //(typeof turf_arg !== "undefined")
+    if (!(o_arg == undefined)) {
+        turf = turf_arg;
+        n_left = n_left_arg;
+        o = o_arg;
     }
+    else {
+        turf = getCurrTurf();
+        setCurrTurf(null);
+
+        n_left = maxHeal;
+
+        o = newHealLog(turf.base);
+        o.loc = turf.loc;
+        o.max_health = turf.max_health;
+        o.start_health = turf.curr_health;
+    }
+
+    if (n_left < 1) {
+        o.heal_fail = false;
+        o.times_healed = maxHeal-n_left;
+        addHealLog(o);
+        gotoPage(profile, waitAction);
+        return;
+    }
+
+    var repairBtn = $('#heal_button');
+    if (repairBtn == null)
+        o.msg_extra = "Can't find repair button";
+    else if ($('#heal_cost').length == 0)
+        o.msg_extra = "Can't find repair button";
+
+    if (repairBtn == null || ($('#heal_cost').length == 0)) {
+        if (n_left == maxHeal)
+            o.heal_fail = true;
+        o.times_healed = maxHeal-n_left;
+        addHealLog(o);
+        gotoPage(profile, waitAction);
+        return;
+    }
+
+    o.heal_cost.push($('#heal_cost').text());
+
+    $('#heal_button').click();
+
+
+    function wrapper() {
+        onBaseHealthCheck(turf, n_left-1, o);
+    }
+    setTimeout(wrapper, healClicksDelay);
 }
 
 function oldOnBaseHealthCheck() {
@@ -270,7 +307,7 @@ function getBaseByName(baseName) {
         if (name == baseName.trim())
             ret = $(this).find('.base_name button');
     });
-    
+
     if (ret == null) {
         addLog("tried to find unexisting base by name: " + baseName);
         var o = newHealLog(baseName);
@@ -321,6 +358,13 @@ function setHealBaseList(lst) {
     GM_setValue("base_list", lst);
 }
 ///////////////logs
+function resetAll() {
+    resetLogs();
+    setRunOnBaseList(false);
+    setCurrTurf(null);
+    setHealBaseList(null);
+}
+
 function resetLogs() {
     GM_setValue("log", []); GM_setValue('heal_log', []);
 }
