@@ -14,12 +14,21 @@
 // @grant       GM_setValue
 // ==/UserScript==
 
+/* TODO:
+   move newHealLog() to bottom of page
+   check out which delays are not being used
+   */
+
+//to check, copy paste then save it to array a
+//then in console:
+//alert(JSON.stringify(a.filter((e)=> e.times_healed != 0)))
+
 //resetAll();
 //resetLogs();
 //getLog()
 //getHealLog()
-var logg = getHealLog();
-for (var line in logg) console.log(line);
+//var logg = getHealLog();
+//for (var line in logg) console.log(line);
 //alert(JSON.stringify(getHealLog()));
 
 var game_url = 'https://app.turfwarsapp.com/';
@@ -32,17 +41,22 @@ var profile = GM_getValue("profile_url", null);
 //0.79 disabled
 //0.7647 = still disabled
 //0.7558 = still disabled //65/86
-var min_health = 0.79; //health at which to try to heal turf
+var min_health = 0.766; //health at which to try to heal turf
 
 var healClicksDelay = 500;
 var waitActionShort = 200;
 var waitAction = 700;
 var waitMainLoop = 2000; //delay when getting new list
 var updateCheckDamage = 3000; //if list is empty this is how long we wait before getting it again
-var waitNextBase = 700; //go from turf list to next base on heal list delay
+var waitNextBase = 1000; //go from turf list to next base on heal list delay
+
+
+var goToPageTime = null;
+//goToPageTime default = 2000
+goToPageTime = 5000; //overwrites delay in gotoPage
 
 var sameWait = null;
-//var sameWait = 400;
+//sameWait = 50000;
 
 if (sameWait != null)
     healClicksDelay = waitActionShort = waitNextBase = updateCheckDamage = waitAction = waitMainLoop = sameWait;
@@ -84,7 +98,7 @@ function start_healer() {
             if ($(this).html().trim() == 'Your Turf') {
                 var loc = getJsonObjDataUrl($(this));
                 GM_setValue("profile_url", loc);
-                window.location.href = loc;
+                gotoPage(loc, waitAction);
             }
         });
     }
@@ -129,7 +143,7 @@ function getDamagedBases() {
 
     $('#base_list tbody tr').each(function () {
         var name = $(this).find('.base_name button').text();
-        var loc = $(this).find('.basi_loc').text();
+        var loc = $(this).find('.base_loc').text();
 
         var dmg_div = $(this).find('.dmg_');
         if (dmg_div.length == 0) dmg_div = $(this).find('.dmg_med');
@@ -292,11 +306,14 @@ function getJsonObjDataUrl(obj) {
 
 //gotoPage(profile, waitAction);
 function gotoPage(url, delay) {
-    console.log('gotoPage HealLog: ' + JSON.stringify(getHealLog()));
+    console.log('heal success: ' + JSON.stringify(getHealLog().filter((e)=> e.times_healed != 0)));
+    //console.log('gotoPage HealLog: ' + JSON.stringify(getHealLog()));
     
     var f = function() {
         window.location.href = url;
     };
+    if (goToPageTime != null)
+        delay = goToPageTime;
     setTimeout(f, delay);
 }
 
