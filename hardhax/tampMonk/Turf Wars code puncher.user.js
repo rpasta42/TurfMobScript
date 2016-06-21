@@ -22,7 +22,8 @@ function kk_getWait() {
     //var wait = Math.random() * 3000 + 3000;
     //var wait = Math.random() * 1000 + 500;
     //var wait = Math.random() * 4000 + 2000;
-    var wait = Math.random() * 2000 + 3000;
+    wait = Math.random() * 3000 + 3000; //decent-ish
+    wait = Math.random() * 4000 + 3000;
     return wait;
 }
 unsafeWindow.on = true;
@@ -42,13 +43,13 @@ var codes = {};
 //historic done 0-100, 100-500, 500-1000, 1000-5000, 5000-6000, 6000-7000
 //7000-10000, 10,000-11,000, 12,000-13,000, 13,000-15,0000, 15,000-17,000
 //17,000-20,000, 20,000-23,000, 23,000-24,000, 24,000-26,000, 26,000-30,000
-//30,000-35,000,
-
-var start = 36999;
-var end = 40000;
-
-/*var start = 34999;
-var end = 40000;*/
+//30,000-35,000
+//35,0000-38,000 funky
+//38,000-40,000, 40,000-41,000, 41,000-42,000, 42,000-45,000
+//45,000-57,000
+//
+var start = 56999;
+var end = 100;
 
 var exit = false;
 
@@ -172,7 +173,7 @@ function onBad(res) {
         kk_invite('4', post_captcha);
     }
     else {
-        console.log('unknown captcha');
+        console.log('unknown captcha: ' + res);
     }
 }
 
