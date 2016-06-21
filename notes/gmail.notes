@@ -1,3 +1,11 @@
+
+-1:
+   looking for cookie:
+      grep -r "SA" . | grep -v flurry | grep -v tapjoin
+      abu.java = mentions SA
+      pc.java = seems to be encryption code, very hard to read
+      ns.java = mentions RSA
+      zz.java = main MAP map builder code
 1:
    java -jar /opt/jd-gui/jd-gui.jar
 
@@ -80,3 +88,5 @@
    grep -ri "pass" . | grep -v flurry
 22:
    grep -ri "pass" . | grep -v flurry | grep -v tapjoy | grep -v crash
+
+

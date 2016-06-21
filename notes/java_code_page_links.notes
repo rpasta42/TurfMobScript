@@ -1,3 +1,9 @@
+zz.java
+   map code
+   app.turfwarsapp.com/map
+   creating base
+      /map/basecreate?blat%.7f&blon=%.7f&revgeo=&
+      
 ./jv.java:  private static final Set<jv> a = Collections.newSetFromMap(new WeakHashMap());
 ./aad.java:      if (!((String)localObject).equals("rtnews")) {
 ./aad.java:            paramJSONObject = localJSONObject.optString("channel", "news");
@@ -16,3 +22,5 @@ public static final String URL_MAIN = "/";
 public static final String URL_MOB = "/invite/";
 public static final String URL_NEWS = "/news/";
 public static final String URL_TEAM = "/team/
+
+
