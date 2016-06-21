@@ -1,5 +1,23 @@
 
+decompiling:
+   guide
+      mv app.apk app.zip; unzip app.zip
+      then run dex2jar, then jd-gui
 
-https://github.com/MajeurAndroid/Adb-Remote-Screen
-entered up to page 41 (7th Jan 2016): http://www.clancodes.com/game/turf-wars/41/
-good source of codes: mob.codes
+   http://jd.benow.ca/
+   https://github.com/pxb1988/dex2jar
+   https://www.learn2crack.com/2013/08/decompile-android-apk-to-java.html
+   http://stackoverflow.com/questions/3593420/is-there-a-way-to-get-the-source-code-from-an-apk-file
+
+remote control tool:
+   https://github.com/MajeurAndroid/Adb-Remote-Screen
+
+codes:
+   entered up to page 41 (7th Jan 2016)
+      http://www.clancodes.com/game/turf-wars/41/
+   good source of codes
+      mob.codes
+
+team chat:
+   http://palringo.im/g/12535673?r=7128459
+

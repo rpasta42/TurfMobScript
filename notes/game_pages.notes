@@ -1,0 +1,18 @@
+./jv.java:  private static final Set<jv> a = Collections.newSetFromMap(new WeakHashMap());
+./aad.java:      if (!((String)localObject).equals("rtnews")) {
+./aad.java:            paramJSONObject = localJSONObject.optString("channel", "news");
+./zy.java:        localObject = aad.a(aaf.getUrlNews());
+./zy.java:      localObject = aaf.newInstance(aaf.getUrlNews());
+./aaf.java:  public static final String URL_NEWS = "/news/";
+./aaf.java:  public static String getUrlNews()
+./aaf.java:    StringBuilder localStringBuilder = new StringBuilder("/news/?rt=");
+./aaf.java:      if (this.a.startsWith("/news/"))
+19:
+aaf.java
+public static final String CRASHLYTICS_WEB_URL_KEY = "currentWebViewURL";
+public static final String URL_FEEDBACK = "/feedback";
+public static final String URL_GODFATHER = "/godfather";
+public static final String URL_MAIN = "/";
+public static final String URL_MOB = "/invite/";
+public static final String URL_NEWS = "/news/";
+public static final String URL_TEAM = "/team/

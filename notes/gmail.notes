@@ -1,0 +1,82 @@
+1:
+   java -jar /opt/jd-gui/jd-gui.jar
+
+   grep -r "turfwarsapp" .
+   app.turfwarsapp.com
+
+2:
+   aao.java = code for connecting to server
+   aaa.java = creating new players, cookes, etc
+
+   grep -r "login" .
+   ./com/crashlytics/android/answers/LoginEvent.java:  static final String TYPE = "login";
+   ./com/crashlytics/android/answers/LoginEvent.java:    return "login";
+   ./com/flurry/sdk/em.java:  private static String c = "http://www.tumblr.com/connect/login_success.html";
+
+3:
+   grep -rl "login" . isntead of grep -r "login"
+4:
+5:
+   grep -ri "login" | grep -vi Dialog
+6:
+   aah.java = tutorial
+7:
+   http://android.stackexchange.com/questions/47924/where-android-apps-store-data
+8:
+   Clearing data and cache dont reset login. Login might be using android manager
+9:
+   http://stackoverflow.com/questions/1925486/android-storing-username-and-password
+10:
+   good, possibly pass stuff:
+   grep -ri "CookieSyncManager" .
+   http://stackoverflow.com/questions/2566485/webview-and-cookies-on-android
+11:
+   cooke sync manager, mostly in aao.java
+12:
+   grep -ri "WebView" .
+13:
+   grep -ri "WebView" . | grep -v flurry | grep -v tapjoy
+14:
+   grep -ri "WebView" . | grep -v flurry | grep -v aaf | grep -v Crash | grep -v tapjoy
+15:
+   abw.java sseems to have a lot of webview and uri stuff
+16:
+   com/meanfreepathllc
+17:
+   all da cookies :p
+   /data/data/com.meanfreepathllc.turfwars/app_webview
+18:
+   grep -ri "cookie" . | grep -v flurry | grep -v tapjoy
+
+   sqlite3 Cookies
+   >.schema
+   >select * from cookies;
+
+   https://app.turfwarsapp.com/news/
+   https://app.turfwarsapp.com/map/ (broken)
+   todo: map, family, mob
+
+   ./jv.java:  private static final Set<jv> a = Collections.newSetFromMap(new WeakHashMap());
+   ./aad.java:      if (!((String)localObject).equals("rtnews")) {
+   ./aad.java:            paramJSONObject = localJSONObject.optString("channel", "news");
+   ./zy.java:        localObject = aad.a(aaf.getUrlNews());
+   ./zy.java:      localObject = aaf.newInstance(aaf.getUrlNews());
+   ./aaf.java:  public static final String URL_NEWS = "/news/";
+   ./aaf.java:  public static String getUrlNews()
+   ./aaf.java:    StringBuilder localStringBuilder = new StringBuilder("/news/?rt=");
+   ./aaf.java:      if (this.a.startsWith("/news/"))
+19:
+   aaf.java
+   public static final String CRASHLYTICS_WEB_URL_KEY = "currentWebViewURL";
+   public static final String URL_FEEDBACK = "/feedback";
+   public static final String URL_GODFATHER = "/godfather";
+   public static final String URL_MAIN = "/";
+   public static final String URL_MOB = "/invite/";
+   public static final String URL_NEWS = "/news/";
+   public static final String URL_TEAM = "/team/"
+20:
+    http://palringo.im/g/12535673?r=7128459
+21:
+   grep -ri "pass" . | grep -v flurry
+22:
+   grep -ri "pass" . | grep -v flurry | grep -v tapjoy | grep -v crash
