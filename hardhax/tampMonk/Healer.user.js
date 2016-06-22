@@ -43,20 +43,29 @@ var profile = GM_getValue("profile_url", null);
 //0.7558 = still disabled //65/86
 var min_health = 0.766; //health at which to try to heal turf
 
-var healClicksDelay = 500;
+var healClicksDelay = 500; //500 by default
 var waitActionShort = 200;
 var waitAction = 700;
-var waitMainLoop = 2000; //delay when getting new list
-var updateCheckDamage = 8000; //if list is empty this is how long we wait before getting it again
+var waitMainLoop = 1000; //delay when getting new list (2,000 ok)
+var updateCheckDamage = 5000; //if list is empty this is how long we wait before getting it again (5,000-13,000, default = 5,000)
 var waitNextBase = 1000; //go from turf list to next base on heal list delay
 
-
 var goToPageTime = null;
+var sameWait = null;
+
+/*overwrites*/
+updateCheckDamage = 2000;
+waitNextBase = 300;
+
+//sameWait = 50000;
+//sameWait = 500;
+//if under attack, set sameWait to 200;
+
 //goToPageTime default = 2000, 10,000 for long time afk, 5,000 = ok'ish
 //goToPageTime = 500; //overwrites delay in gotoPage
 
-var sameWait = null;
-//sameWait = 50000;
+/* end overwrites */
+
 
 if (sameWait != null)
     healClicksDelay = waitActionShort = waitNextBase = updateCheckDamage = waitAction = waitMainLoop = sameWait;

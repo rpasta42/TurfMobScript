@@ -1,0 +1,19 @@
+TODO keep track of fixes, button dissapears after we're done
+
+<td class="base_name"><button role="button" class="navitem addbtn" data-url="/map/basedetail?enid=716400387|child">econ swag</button><br>
+<span class="base_loc">Oviedo</span></td>
+<td class="dmg_">86/86</td>
+<td><span class="n_cash">$53.6k</span></td>
+<td><span class="n_cash">$0</span></td>
+<td class="ls"><span class="n_cash">$0</span></td>
+<td><span class="n_cash">$0</span></td>
+<td><span class="n_cash">$53.6k</span></td>
+
+<td class="dmg_med">54/86</td>
+
+keep track of how many times healed
+check if heal button doesn't exist on every heal
+
+instead of just storing names, store the whole base info dictionary
+
+for healLog only store one JSON object per base instead of array strings
