@@ -156,6 +156,7 @@ function getDamagedBases() {
 
         var dmg_div = $(this).find('.dmg_');
         if (dmg_div.length == 0) dmg_div = $(this).find('.dmg_med');
+        if (dmg_div.length == 0) dmg_div = $(this).find('.dmg_hvy');
 
         var dmg = dmg_div.text();
 
