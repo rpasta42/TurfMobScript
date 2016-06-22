@@ -41,7 +41,9 @@ var profile = GM_getValue("profile_url", null);
 //0.79 disabled
 //0.7647 = still disabled
 //0.7558 = still disabled //65/86
-var min_health = 0.766; //health at which to try to heal turf
+
+//var min_health = 0.766 = botton disabled: mostly works
+var min_health = 0.755; //health at which to try to heal turf
 
 var healClicksDelay = 500; //500 by default
 var waitActionShort = 200;
@@ -59,6 +61,8 @@ waitNextBase = 300;
 
 //sameWait = 50000;
 //sameWait = 500;
+//sameWait = 10000;
+//sameWait = 2000;
 //if under attack, set sameWait to 200;
 
 //goToPageTime default = 2000, 10,000 for long time afk, 5,000 = ok'ish
