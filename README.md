@@ -34,3 +34,4 @@ The new version of the hack:
 - Solves captcha
 - Has optional delays between every code
 
+License: BSD
